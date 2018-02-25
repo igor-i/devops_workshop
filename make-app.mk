@@ -6,7 +6,7 @@ app:
 app-bash:
 	docker-compose run --user=$(USER) app bash
 
-app-setup: app-build
+app-setup: development-setup-env app-build
 	docker-compose run --user=$(USER) app bin/setup
 
 app-build:

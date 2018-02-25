@@ -7,14 +7,15 @@ services:
       dockerfile: Dockerfile.development
     command: sh -c "rm -f tmp/pids/server.pid && bin/rails s -b 0.0.0.0"
     ports:
-      - "8080:3000"
+      - "${PORT}:${PORT}"
     volumes:
       - "~/.bash_history:/.bash_history"
       - "./services/app:/usr/src/app:cached"
       - "/tmp:/tmp:delegated"
     depends_on:
       - db
+    env_file: ".env"
   db:
     image: postgres
     environment:
-      POSTGRES_USER: app
+      POSTGRES_USER: "${DB_USERNAME}"
